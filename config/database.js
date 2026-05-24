@@ -78,7 +78,6 @@ const dbWrapper = {
     }
 };
 
-// Export BOTH the init function for server.js AND the queries for services/routes
 module.exports = {
     initializeDatabase,
     db: dbWrapper
