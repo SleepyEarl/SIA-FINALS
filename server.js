@@ -43,12 +43,10 @@ app.use('/api/tasks', taskRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/stats', statsRoutes);
 
-// Serve index.html for root path
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// 404 handler
 app.use((req, res) => {
     res.status(404).json({
         success: false,
@@ -57,17 +55,12 @@ app.use((req, res) => {
     });
 });
 
-// Error handling middleware (must be last)
 app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`
-    ╔════════════════════════════════════════╗
-    ║     Task Manager API Server             ║
-    ║     Running on Port: ${PORT}                 ║
-    ║     Mode: ${process.env.NODE_ENV || 'development'}         ║
-    ╚════════════════════════════════════════╝
+    console.log(`Task Manager API Server Running on Port: ${PORT}                 
+        Mode: ${process.env.NODE_ENV || 'development'}         
     `);
 });
 

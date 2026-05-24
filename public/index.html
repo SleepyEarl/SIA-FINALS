@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager API</title>
+    <title>Task Manager API Documentation</title>
     <style>
         * {
             margin: 0;
@@ -12,209 +12,187 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 40px 20px;
+            color: #1e293b;
+            line-height: 1.5;
         }
 
         .container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
             padding: 40px;
             max-width: 800px;
             width: 100%;
         }
 
         h1 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 2.5em;
+            color: #0f172a;
+            margin-bottom: 4px;
+            font-size: 2em;
+            font-weight: 700;
         }
 
         .subtitle {
-            color: #666;
+            color: #64748b;
+            margin-bottom: 24px;
+            font-size: 1em;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
             margin-bottom: 30px;
-            font-size: 1.1em;
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
         }
 
         .info-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 16px;
+            border-radius: 6px;
         }
 
         .info-card h3 {
-            margin-bottom: 10px;
-            font-size: 0.9em;
-            opacity: 0.9;
+            margin-bottom: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .info-card p {
-            font-size: 1.3em;
-            font-weight: bold;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #0f172a;
         }
 
         .api-section {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .api-section h2 {
-            color: #667eea;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .endpoint {
-            background: #f8f9fa;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
+            background: #ffffff;
+            padding: 14px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .endpoint-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .endpoint-method {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 2px 8px;
             border-radius: 4px;
-            font-weight: bold;
-            margin-right: 10px;
-            font-size: 0.9em;
+            font-weight: 700;
+            font-size: 0.75em;
+            min-width: 65px;
+            text-align: center;
         }
 
-        .method-get {
-            background: #61affe;
-            color: white;
-        }
-
-        .method-post {
-            background: #49cc90;
-            color: white;
-        }
-
-        .method-put {
-            background: #fca130;
-            color: white;
-        }
-
-        .method-patch {
-            background: #50e3c2;
-            color: white;
-        }
-
-        .method-delete {
-            background: #f93e3e;
-            color: white;
-        }
+        .method-get { background: #e0f2fe; color: #0369a1; }
+        .method-post { background: #dcfce7; color: #15803d; }
+        .method-put { background: #fef3c7; color: #b45309; }
+        .method-patch { background: #f5f3ff; color: #6d28d9; }
+        .method-delete { background: #fef2f2; color: #b91c1c; }
 
         .endpoint-path {
-            font-family: 'Courier New', monospace;
-            color: #333;
-            font-size: 0.95em;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            color: #0f172a;
+            font-size: 0.9em;
+            font-weight: 600;
         }
 
         .endpoint-desc {
-            color: #666;
-            margin-top: 5px;
+            color: #475569;
             font-size: 0.9em;
+            padding-left: 75px;
         }
 
         .cta-section {
             text-align: center;
             margin-top: 30px;
             padding-top: 30px;
-            border-top: 2px solid #eee;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .cta-section p {
+            margin-bottom: 16px;
+            color: #475569;
+            font-size: 0.95em;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
-            margin: 10px 5px;
-            border-radius: 8px;
+            padding: 10px 24px;
+            border-radius: 6px;
             text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-            border: none;
-            font-size: 1em;
+            font-weight: 500;
+            font-size: 0.95em;
+            transition: background-color 0.15s ease;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: #1e293b;
+            color: #ffffff;
+            border: 1px solid #1e293b;
         }
 
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .docs-link {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .docs-link:hover {
-            text-decoration: underline;
-        }
-
-        .status-badge {
-            display: inline-block;
-            background: #49cc90;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-bottom: 20px;
+        .btn-primary:hover {
+            background: #0f172a;
         }
 
         @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .btn {
-                display: block;
-                width: 100%;
-            }
+            .container { padding: 20px; }
+            h1 { font-size: 1.6em; }
+            .info-grid { grid-template-columns: 1fr; }
+            .endpoint-desc { padding-left: 0; margin-top: 2px; }
+            .endpoint-row { flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Task Manager API</h1>
+        <h1>Task Manager API</h1>
         <p class="subtitle">Microservice Architecture with RESTful Endpoints</p>
 
-        <div class="status-badge">✓ Server is Running</div>
+        <div class="status-badge">Server is Running</div>
 
         <div class="info-grid">
             <div class="info-card">
@@ -232,116 +210,137 @@
         </div>
 
         <div class="api-section">
-            <h2>📋 Task Endpoints</h2>
+            <h2>Task Endpoints</h2>
             
             <div class="endpoint">
-                <span class="endpoint-method method-get">GET</span>
-                <span class="endpoint-path">/api/tasks</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-path">/api/tasks</span>
+                </div>
                 <p class="endpoint-desc">Get all tasks (supports filtering: ?category_id=xxx&priority=xxx&search=xxx)</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-get">GET</span>
-                <span class="endpoint-path">/api/tasks/:id</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-path">/api/tasks/:id</span>
+                </div>
                 <p class="endpoint-desc">Get a specific task by ID</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-post">POST</span>
-                <span class="endpoint-path">/api/tasks</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-post">POST</span>
+                    <span class="endpoint-path">/api/tasks</span>
+                </div>
                 <p class="endpoint-desc">Create a new task</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-put">PUT</span>
-                <span class="endpoint-path">/api/tasks/:id</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-put">PUT</span>
+                    <span class="endpoint-path">/api/tasks/:id</span>
+                </div>
                 <p class="endpoint-desc">Update a task</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-patch">PATCH</span>
-                <span class="endpoint-path">/api/tasks/:id/toggle</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-patch">PATCH</span>
+                    <span class="endpoint-path">/api/tasks/:id/toggle</span>
+                </div>
                 <p class="endpoint-desc">Toggle task completion status</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-patch">PATCH</span>
-                <span class="endpoint-path">/api/tasks/:id/timer</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-patch">PATCH</span>
+                    <span class="endpoint-path">/api/tasks/:id/timer</span>
+                </div>
                 <p class="endpoint-desc">Update task timer</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-delete">DELETE</span>
-                <span class="endpoint-path">/api/tasks/:id</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-delete">DELETE</span>
+                    <span class="endpoint-path">/api/tasks/:id</span>
+                </div>
                 <p class="endpoint-desc">Delete a task</p>
             </div>
         </div>
 
         <div class="api-section">
-            <h2>🏷️ Category Endpoints</h2>
+            <h2>Category Endpoints</h2>
             
             <div class="endpoint">
-                <span class="endpoint-method method-get">GET</span>
-                <span class="endpoint-path">/api/categories</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-path">/api/categories</span>
+                </div>
                 <p class="endpoint-desc">Get all categories with task counts</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-get">GET</span>
-                <span class="endpoint-path">/api/categories/:id</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-path">/api/categories/:id</span>
+                </div>
                 <p class="endpoint-desc">Get a specific category</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-post">POST</span>
-                <span class="endpoint-path">/api/categories</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-post">POST</span>
+                    <span class="endpoint-path">/api/categories</span>
+                </div>
                 <p class="endpoint-desc">Create a new category</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-put">PUT</span>
-                <span class="endpoint-path">/api/categories/:id</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-put">PUT</span>
+                    <span class="endpoint-path">/api/categories/:id</span>
+                </div>
                 <p class="endpoint-desc">Update a category</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-delete">DELETE</span>
-                <span class="endpoint-path">/api/categories/:id</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-delete">DELETE</span>
+                    <span class="endpoint-path">/api/categories/:id</span>
+                </div>
                 <p class="endpoint-desc">Delete a category</p>
             </div>
         </div>
 
         <div class="api-section">
-            <h2>📊 Statistics Endpoints</h2>
+            <h2>Statistics Endpoints</h2>
             
             <div class="endpoint">
-                <span class="endpoint-method method-get">GET</span>
-                <span class="endpoint-path">/api/stats</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-path">/api/stats</span>
+                </div>
                 <p class="endpoint-desc">Get task statistics and analytics</p>
             </div>
 
             <div class="endpoint">
-                <span class="endpoint-method method-get">GET</span>
-                <span class="endpoint-path">/api/stats/export/json</span>
+                <div class="endpoint-row">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-path">/api/stats/export/json</span>
+                </div>
                 <p class="endpoint-desc">Export all tasks and categories as JSON</p>
             </div>
         </div>
 
         <div class="cta-section">
-            <p style="margin-bottom: 20px; color: #666;">
-                Use an API client like <strong>Postman</strong> or <strong>Thunder Client</strong> to test the endpoints
-            </p>
-            <a href="https://www.postman.com/downloads/" class="btn btn-primary" target="_blank">
-                📥 Download Postman
-            </a>
-            <p style="margin-top: 20px; color: #999; font-size: 0.9em;">
-                API Base URL: <code style="background: #f0f0f0; padding: 2px 8px; border-radius: 4px;">http://localhost:5000/api</code>
+            <p style="margin-top: 20px; color: #64748b; font-size: 0.85em;">
+                API Base URL: <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #0f172a;">http://localhost:5000/api</code>
             </p>
         </div>
     </div>
 
     <script>
-        // Check API status
         fetch('/api/health')
             .then(res => res.json())
             .then(data => {

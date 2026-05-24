@@ -1,16 +1,8 @@
-/**
- * Statistics Routes
- * Microservice for retrieving task statistics and analytics
- */
-
 const express = require('express');
 const router = express.Router();
 const { TaskService, CategoryService } = require('../config/database');
 
-/**
- * GET /api/stats
- * Get overall task statistics
- */
+// GET /api/stats
 router.get('/', (req, res) => {
     try {
         const allTasks = TaskService.getAllTasks();
@@ -56,10 +48,7 @@ router.get('/', (req, res) => {
     }
 });
 
-/**
- * GET /api/stats/export
- * Export all tasks as JSON
- */
+//GET /api/stats/export
 router.get('/export/json', (req, res) => {
     try {
         const tasks = TaskService.getAllTasks();
